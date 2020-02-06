@@ -22,6 +22,8 @@ export class SignInComponent implements OnInit{
             userName: ['', Validators.required],
             password: ['', Validators.required]
         });
+        this.platformDetectorService.isPlatformBrowser() &&
+                this.userNameInput.nativeElement.focus();
         
     }
 
@@ -38,6 +40,7 @@ export class SignInComponent implements OnInit{
                 this.loginForm.reset();
                 this.platformDetectorService.isPlatformBrowser() &&
                     this.userNameInput.nativeElement.focus();
+                alert('Login ou senha incorreto!');
             }
         );
     }

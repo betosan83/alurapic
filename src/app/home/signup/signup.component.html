@@ -1,8 +1,8 @@
-<h4 class="text-center"> Register to embrace a new world!</h4>
+<h4 class="text-center"> Bem vindo a nossa casa!</h4>
 
 <form [formGroup]="signupForm" class="form mt-4" (submit)="signup()">
     <div class="form-group">
-        <input formControlName="email" placeholder="email" class="form-control" autofocus >
+        <input #inputEmail formControlName="email" placeholder="E-mail" class="form-control" autofocus >
         <ap-vmessage
             *ngIf="signupForm.get('email').errors?.required"
             text="Digite seu e-mail!">
@@ -14,7 +14,7 @@
     </div>
 
     <div class="form-group">
-        <input formControlName="fullName" placeholder="full name" class="form-control">
+        <input formControlName="fullName" placeholder="Nome completo" class="form-control">
         <ap-vmessage
             *ngIf="signupForm.get('fullName').errors?.required"
             text="Digite seu nome completo!">
@@ -30,7 +30,7 @@
     </div>
 
     <div class="form-group">
-        <input formControlName="userName" placeholder="user name" class="form-control">
+        <input formControlName="userName" placeholder="Usuario" class="form-control">
         <ap-vmessage
             *ngIf="signupForm.get('userName').errors?.required"
             text="Digite seu nome!">
@@ -55,10 +55,10 @@
     </div>
 
     <div class="form-group">
-        <input formControlName="password" type="password" placeholder="password" class="form-control">
+        <input formControlName="password" type="password" placeholder="Senha" class="form-control">
         <ap-vmessage
             *ngIf="signupForm.get('password').errors?.required"
-            text="Digite seu nome!">
+            text="Digite sua senha!">
         </ap-vmessage>
         <ap-vmessage
             *ngIf="signupForm.get('password').errors?.minlength"
@@ -70,7 +70,7 @@
         </ap-vmessage>
     </div>
 
-    <button [disabled]="signupForm.invalid || signupForm.pending" class="btn btn-primary btn-block">Register</button>
+    <button [disabled]="signupForm.invalid || signupForm.pending" class="btn btn-primary btn-block">Cadastre-se</button>
 
-    <p>Already a user?<a [routerLink]="['']">Sign In!</a></p>
+    <p>Ja possui cadastro?<a [routerLink]="['']"> Clique aqui!</a></p>
 </form>
