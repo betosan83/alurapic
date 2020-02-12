@@ -5,7 +5,8 @@ import { User } from '../user/user';
 
 @Component({
     selector: 'ap-footer',
-    templateUrl: './footer.component.html'
+    templateUrl: './footer.component.html',
+    styleUrls: ['./footer.css']
 })
 export class FooterComponent implements OnInit{
 
