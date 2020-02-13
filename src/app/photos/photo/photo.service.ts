@@ -49,4 +49,8 @@ export class PhotoService {
     removePhoto(photoId: number) {
         return this.http.delete(API + '/photos/' + photoId);
     }
+
+    like(photoId: number) {
+        this.http.post(API + '/photos/' + photoId + '/like', {}, { observe: 'response' })
+    }
 }

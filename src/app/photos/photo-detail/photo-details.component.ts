@@ -23,14 +23,20 @@ export class PhotoDetailsComponent implements OnInit{
     ngOnInit(): void {
         this.photoId = this.route.snapshot.params.photoId;
         this.photo$ = this.photoService.findById(this.photoId);
+        this.photo$.subscribe(() => {}, err => {
+            this.router.navigate(['not-found']);
+        });
        
     }
 
     remove() {
         this.photoService.removePhoto(this.photoId)
             .subscribe(() =>{
-                this.alertService.success('Foto removida');
+                this.alertService.success('Foto removida com sucesso!');
                 this.router.navigate(['']);
+            },
+            err => {
+                this.alertService.warning('Não foi possível remover a foto!');
             });
     }
 }
