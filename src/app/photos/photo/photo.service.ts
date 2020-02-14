@@ -2,6 +2,8 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Photo } from './photo';
 import { PhotoComment } from './photo-comment';
+import { pipe, of, throwError, Observable } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 const API = 'http://localhost:3000';
 
@@ -29,7 +31,10 @@ export class PhotoService {
         formData.append('allowComments', allowComments ? 'true' : 'false');
         formData.append('imageFile', file);
         console.log(formData);
-        return this.http.post(API + '/photos/upload', formData);
+        return this.http.post(API + '/photos/upload', formData, {
+            observe: 'events',
+            reportProgress: true
+        });
     }
 
     findById(photoId: number) {
@@ -51,6 +56,11 @@ export class PhotoService {
     }
 
     like(photoId: number) {
-        this.http.post(API + '/photos/' + photoId + '/like', {}, { observe: 'response' })
+        return this.http.post(API + '/photos/' + photoId + '/like', {}, { observe: 'response' })
+            .pipe(map(res => true))
+            .pipe(catchError(err => {
+                return err.status == '304' ? of(false) : throwError(err);
+            }));
     }
 }
+
